@@ -1,5 +1,4 @@
 import { google } from 'googleapis';
-import { OAuth2Client } from 'google-auth-library';
 import { tool } from 'ai';
 import { z } from 'zod';
 import { getServerSession } from 'next-auth';

@@ -16,7 +16,7 @@ export default function navbar() {
           {status === "authenticated" && (
             <div className="flex items-center gap-4">
               <div className="text-sm text-gray-600 dark:text-gray-300">{session.user?.email}</div>
-              <img src={session.user?.email} alt="" />
+              <img src={`${session.user?.email}`} alt="" />
               <Button variant="outline" size="sm" onClick={() => signOut()} className="flex items-center gap-2">
                 <LogOut className="h-4 w-4" />
                 Sign out

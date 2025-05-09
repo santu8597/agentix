@@ -15,7 +15,7 @@ export const generateImage = tool({
         headers: {
           accept: 'application/json',
           'content-type': 'application/json',
-          Authorization: `Bearer 2f5fdc36-e2da-43cc-b8f9-acfb5664619e`, // ✅ Secure your key
+          Authorization: `Bearer ${process.env.CORSEL_API_KEY}`, // ✅ Secure your key
         },
         body: JSON.stringify({
           cfg_scale: Math.floor(Math.random() * 3) + 2,

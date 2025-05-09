@@ -6,6 +6,7 @@ export const webSearch = tool({
   parameters: z.object({
     query: z.string().describe("The search query"),
   }),
+  
   execute: async ({ query }) => {
     try {
       // You'll need to add TAVILY_API_KEY to your environment variables
