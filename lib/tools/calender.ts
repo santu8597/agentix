@@ -4,157 +4,169 @@ import { z } from 'zod';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/providers/next-auth';
 
-const calendar = google.calendar('v3');
-
 export const googleCalendarManager = tool({
-  description: 'Manage Google Calendar: view, add, update, delete, or search events; send daily summaries.',
+  description: 'Manage Google Calendar events including viewing, adding, updating, and deleting events.',
   parameters: z.object({
-    action: z.enum(['view', 'add', 'update', 'delete', 'search', 'summary']),
-    date: z.string().optional().describe('ISO date for viewing or adding events, e.g., 2025-05-10'),
-    timeMin: z.string().optional().describe('Start time for filtering, in ISO format'),
-    timeMax: z.string().optional().describe('End time for filtering, in ISO format'),
-    calendarId: z.string().optional().describe('ID of the calendar (default is "primary")'),
-    title: z.string().optional().describe('Title of the event'),
-    description: z.string().optional().describe('Description of the event'),
-    location: z.string().optional().describe('Location of the event'),
-    startTime: z.string().optional().describe('Start time in ISO format'),
-    endTime: z.string().optional().describe('End time in ISO format'),
-    attendees: z.array(z.string()).optional().describe('List of email addresses to invite'),
-    eventId: z.string().optional().describe('ID of the event to update or delete'),
-    query: z.string().optional().describe('Keyword/location/participant to search in events'),
+    action: z.enum(['view', 'add', 'update', 'delete']).describe('Action to perform on Google Calendar'),
+    title: z.string().optional().describe('Event title for add or update action'),
+    startTime: z.string().optional().describe('Event start time (ISO format)'),
+    endTime: z.string().optional().describe('Event end time (ISO format)'),
+    date: z.string().optional().describe('Event date (ISO format)'),
+    description: z.string().optional().describe('Event description for add or update action'),
+    eventId: z.string().optional().describe('Event ID for delete or update action'),
+    filterCalendarId: z.string().optional().describe('Specific calendar ID to filter events by'),
+    viewType: z.enum(['today', 'tomorrow', 'week']).optional().describe('View schedule type: today, tomorrow, or week'),
   }),
-  execute: async (params) => {
+  execute: async ({ action, title, startTime, endTime, date, description, eventId, filterCalendarId, viewType }) => {
     const session = await getServerSession(authOptions);
     const refreshToken = session?.refreshToken;
 
     if (!refreshToken) {
-      return { success: false, message: 'Missing refresh token. Please sign in again with Google.' };
+      return {
+        success: false,
+        message: 'Missing refresh token. Please sign in again with Google.',
+      };
     }
 
     const oauth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID!,
       process.env.GOOGLE_CLIENT_SECRET!
     );
+
     oauth2Client.setCredentials({ refresh_token: refreshToken });
 
     try {
       const { credentials } = await oauth2Client.refreshAccessToken();
       oauth2Client.setCredentials(credentials);
 
-      const calendarId = params.calendarId || 'primary';
+      const calendar = google.calendar({
+        version: 'v3',
+        auth: oauth2Client,
+      });
 
-      switch (params.action) {
-        case 'view': {
-          const res = await calendar.events.list({
-            calendarId,
-            timeMin: params.timeMin || new Date().toISOString(),
-            timeMax: params.timeMax || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 1 week
-            singleEvents: true,
-            orderBy: 'startTime',
-          });
+      // View Upcoming Events (Today, Tomorrow, or Week Overview)
+      if (action === 'view') {
+        let timeMin: string;
+        let timeMax: string;
 
+        const now = new Date();
+        if (viewType === 'today') {
+          timeMin = now.toISOString();
+          const endOfDay = new Date(now);
+          endOfDay.setHours(23, 59, 59);
+          timeMax = endOfDay.toISOString();
+        } else if (viewType === 'tomorrow') {
+          const tomorrow = new Date(now);
+          tomorrow.setDate(now.getDate() + 1);
+          timeMin = tomorrow.toISOString();
+          const endOfDay = new Date(tomorrow);
+          endOfDay.setHours(23, 59, 59);
+          timeMax = endOfDay.toISOString();
+        } else if (viewType === 'week') {
+          const startOfWeek = new Date(now);
+          startOfWeek.setDate(now.getDate() - now.getDay()); // Start of this week
+          timeMin = startOfWeek.toISOString();
+          const endOfWeek = new Date(startOfWeek);
+          endOfWeek.setDate(startOfWeek.getDate() + 7); // End of next week
+          timeMax = endOfWeek.toISOString();
+        } else {
           return {
-            success: true,
-            events: res.data.items?.map(evt => ({
-              id: evt.id,
-              summary: evt.summary,
-              start: evt.start,
-              end: evt.end,
-              location: evt.location,
-            })) || [],
+            success: false,
+            message: 'Invalid view type.',
           };
         }
 
-        case 'add': {
-          const res = await calendar.events.insert({
-            calendarId,
-            requestBody: {
-              summary: params.title,
-              description: params.description,
-              location: params.location,
-              start: { dateTime: params.startTime },
-              end: { dateTime: params.endTime },
-              attendees: params.attendees?.map(email => ({ email })) || [],
-              reminders: { useDefault: true },
-            },
-          });
-          return { success: true, event: res.data };
-        }
+        const response = await calendar.events.list({
+          calendarId: filterCalendarId || 'primary',
+          timeMin,
+          timeMax,
+          singleEvents: true,
+          orderBy: 'startTime',
+        });
 
-        case 'update': {
-          if (!params.eventId) return { success: false, message: 'Missing event ID for update.' };
-          const res = await calendar.events.patch({
-            calendarId,
-            eventId: params.eventId,
-            requestBody: {
-              summary: params.title,
-              description: params.description,
-              location: params.location,
-              start: params.startTime ? { dateTime: params.startTime } : undefined,
-              end: params.endTime ? { dateTime: params.endTime } : undefined,
-              attendees: params.attendees?.map(email => ({ email })),
-            },
-          });
-          return { success: true, updatedEvent: res.data };
-        }
-
-        case 'delete': {
-          if (!params.eventId) return { success: false, message: 'Missing event ID for deletion.' };
-          await calendar.events.delete({ calendarId, eventId: params.eventId });
-          return { success: true, message: 'Event deleted successfully.' };
-        }
-
-        case 'search': {
-          const res = await calendar.events.list({
-            calendarId,
-            q: params.query,
-            timeMin: new Date().toISOString(),
-            singleEvents: true,
-            orderBy: 'startTime',
-          });
-
-          return {
-            success: true,
-            results: res.data.items?.map(evt => ({
-              id: evt.id,
-              summary: evt.summary,
-              start: evt.start,
-              location: evt.location,
-              attendees: evt.attendees,
-            })) || [],
-          };
-        }
-
-        case 'summary': {
-          const res = await calendar.events.list({
-            calendarId,
-            timeMin: new Date().setHours(0, 0, 0, 0).toString(),
-            timeMax: new Date().setHours(23, 59, 59, 999).toString(),
-            singleEvents: true,
-            orderBy: 'startTime',
-          });
-
-          const events = res.data.items || [];
-          const summaryText = events.length
-            ? events.map(e => `- ${e.summary} at ${e.start?.dateTime || e.start?.date}`).join('\n')
-            : 'No events scheduled today.';
-
-          // Integrate email/SMS/dashboard logic here if needed
-
-          return {
-            success: true,
-            summary: summaryText,
-          };
-        }
-
-        default:
-          return { success: false, message: 'Unsupported action type.' };
+        return {
+          success: true,
+          events: response.data.items || [],
+        };
       }
-    } catch (error: any) {
-      console.error('Google Calendar error:', error);
+
+      // Add New Event
+      if (action === 'add') {
+        const event = {
+          summary: title,
+          description: description,
+          start: {
+            dateTime: startTime,
+            timeZone: 'UTC',
+          },
+          end: {
+            dateTime: endTime,
+            timeZone: 'UTC',
+          },
+        };
+
+        const response = await calendar.events.insert({
+          calendarId: filterCalendarId || 'primary',
+          requestBody: event,
+        });
+
+        return {
+          success: true,
+          message: 'Event created successfully.',
+          event: response.data,
+        };
+      }
+
+      // Update Event
+      if (action === 'update' && eventId) {
+        const updatedEvent = {
+          summary: title,
+          description: description,
+          start: {
+            dateTime: startTime,
+            timeZone: 'UTC',
+          },
+          end: {
+            dateTime: endTime,
+            timeZone: 'UTC',
+          },
+        };
+
+        const response = await calendar.events.update({
+          calendarId: filterCalendarId || 'primary',
+          eventId,
+          requestBody: updatedEvent,
+        });
+
+        return {
+          success: true,
+          message: 'Event updated successfully.',
+          event: response.data,
+        };
+      }
+
+      // Delete Event
+      if (action === 'delete' && eventId) {
+        await calendar.events.delete({
+          calendarId: filterCalendarId || 'primary',
+          eventId,
+        });
+
+        return {
+          success: true,
+          message: 'Event deleted successfully.',
+        };
+      }
+
       return {
         success: false,
-        message: error.message || 'Failed to interact with Google Calendar.',
+        message: 'Invalid action or missing parameters.',
+      };
+    } catch (error: any) {
+      console.error('Google Calendar API error:', error);
+      return {
+        success: false,
+        message: error.message || 'Failed to manage Google Calendar events.',
       };
     }
   },
