@@ -61,11 +61,14 @@ npm install
 Create a `.env.local` file with your API credentials:
 
 ```env
-GOOGLE_API_KEY=your-google-api-key
-OPENWEATHER_API_KEY=your-weather-api-key
-YOUTUBE_API_KEY=your-youtube-api-key
-EMAIL_CLIENT_ID=your-client-id
-EMAIL_CLIENT_SECRET=your-client-secret
+GOOGLE_GENERATIVE_AI_API_KEY=your-google-generative-ai-api-key
+TAVILY_API_KEY=your-tavily-api-key
+SERP_API_KEY=your-serp-api-key
+GOOGLE_CLIENT_ID=your-google-oauth-client-id
+GOOGLE_CLIENT_SECRET=your-google-oauth-client-secret
+NEXTAUTH_SECRET=your-nextauth-secret
+NEXTAUTH_URL=http://localhost:3000
+CORSEL_API_KEY=your-corsel-api-key
 ```
 
 ### 4. Start the dev server
