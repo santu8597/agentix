@@ -90,18 +90,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to explore A
 
 ---
 
-## 🔧 Code Snippet: Dynamic Tool Injection
-
-```ts
-const filteredTools = Object.fromEntries(
-  array_tools.map(({ tool }) => [tool, allTools[tool]])
-)
-```
-
-This allows agents to only access tools chosen for a given session.
-
----
-
 ## 🛠️ Tech Stack
 
 * **Frontend:** Next.js, React, Tailwind CSS, Lucide Icons
