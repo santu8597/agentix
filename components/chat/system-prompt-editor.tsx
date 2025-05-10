@@ -6,8 +6,17 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { ChevronDown, ChevronUp, Cloud, Terminal, ImageIcon, RefreshCw,Mail,Globe ,Plane,Youtube,Search,Folder,Music} from "lucide-react"
+import { ChevronDown, ChevronUp, Cloud, Terminal, ImageIcon, RefreshCw,Mail,Globe ,Plane,Youtube,Search,Folder,Music,Wand2} from "lucide-react"
+import { generateText } from "ai"
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
 
+const google = createGoogleGenerativeAI({
+  apiKey: "AIzaSyAVQpop5MJZpJg2x3DhEfWs4nCFmOQ-Op0",
+});
+// const { text } = await generateText({
+// model: google("models/gemini-2.0-flash-exp"),
+// prompt: "What is love?"
+// })
 interface SystemPromptEditorProps {
   systemPrompt: string
   onSystemPromptChange: (prompt: string) => void
@@ -15,6 +24,8 @@ interface SystemPromptEditorProps {
   onToolsChange: (tools: string[]) => void
   onApplyConfig: () => void
 }
+
+
 
 export default function SystemPromptEditor({
   systemPrompt,
@@ -24,6 +35,19 @@ export default function SystemPromptEditor({
   onApplyConfig,
 }: SystemPromptEditorProps) {
   const [isExpanded, setIsExpanded] = useState(true)
+  const [isGenerating, setIsGenerating] = useState(false)
+  const handleAiGenerate = async () => {
+    setIsGenerating(true)
+    const { text } = await generateText({
+      model: google("models/gemini-2.0-flash"),
+      prompt: `generate a system prompt for an AI that can use the following tools: ${selectedTools.join(", ")}. The system prompt should be and enchance the AI's ability to use the tools effectively. The system prompt should be in a rich format.Use the following system prompt as a base: ${systemPrompt}.**keep the system prompt medium and descriptive**
+      remove the markdown formatting and return only the system prompt.
+      ->use multiple tools if needed
+      `,
+    })
+    setIsGenerating(false)
+    onSystemPromptChange(text);
+  }
 
   const availableTools = [
     { id: "getWeather", name: "Weather Tool", icon: <Cloud className="h-4 w-4 mr-2" /> },
@@ -68,15 +92,16 @@ export default function SystemPromptEditor({
           <div className="space-y-4">
             <div>
               <Label htmlFor="system-prompt">System Prompt</Label>
+              <Button className="ml-4" disabled={isGenerating} onClick={handleAiGenerate}>{isGenerating?"Generating...":<>Generate <Wand2 className="h-4 w-4" /> </>}</Button>
               <Textarea
                 id="system-prompt"
                 placeholder="Enter system instructions for the AI..."
-                className="mt-4 min-h-[290px] max-h-[290px] overflow-y-scroll"
+                className="mt-4 min-h-[270px] max-h-[270px] overflow-y-scroll"
                 value={systemPrompt}
                 onChange={(e) => onSystemPromptChange(e.target.value)}
               />
             </div>
-
+            
             <div>
               <Label className="mb-2 block">Available Tools</Label>
               <div className="grid grid-cols-2 gap-2">
