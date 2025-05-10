@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 export default function ChatHeader() {
   const { data: session, status } = useSession()
   return (
-    <div className="p-4 border-b bg-gradient-to-r flex gap-4 from-primary/10 to-secondary/10 backdrop-blur-sm">
+    <div className="flex gap-8 backdrop-blur-sm">
       
       <div className="flex items-center gap-2">
         <Sparkles className="h-5 w-5 text-primary" />
