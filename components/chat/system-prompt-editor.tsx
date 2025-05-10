@@ -65,6 +65,7 @@ export default function SystemPromptEditor({
     { id: "scrapeDocsTool", name: "Web Scraper Tool", icon: <Search className="h-4 w-4 mr-2" /> },
     { id: "fetchFlightDetails", name: "Flight Tool", icon: <Plane className="h-4 w-4 mr-2" /> },
     { id: "fetchYouTubeVideo", name: "YouTube Tool", icon: <Youtube className="h-4 w-4 mr-2" /> },
+    { id: "googleCalendarManager", name: "Calender Tool", icon: <Calendar className="h-4 w-4 mr-2" /> }
   ]
 
   const handleToolToggle = (toolId: string) => {

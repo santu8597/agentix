@@ -11,6 +11,7 @@ import {fetchYouTubeVideo} from "@/lib/tools/youtube"
 import {scrapeDocsTool} from "@/lib/tools/web-scrap"
 import {analyzeSrcStructureTool} from "@/lib/tools/folder-structure"
 import { musicMood } from "@/lib/tools/music"
+import { googleCalendarManager } from "@/lib/tools/calender"
 interface Tool {
     name: keyof typeof toolRegistry;
     tool: string;
@@ -27,7 +28,8 @@ const toolRegistry = {
   fetchYouTubeVideo,
   scrapeDocsTool,
   analyzeSrcStructureTool,
-  musicMood
+  musicMood,
+  googleCalendarManager
 }
 export const maxDuration = 30
 
