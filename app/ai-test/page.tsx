@@ -207,10 +207,10 @@ export default function Chat() {
 
           {configApplied && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              className="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg"
+              exit={{ opacity: 0, y: 0 }}
+              className="fixed bottom-64 right-20 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg"
             >
               Configuration applied successfully!
             </motion.div>

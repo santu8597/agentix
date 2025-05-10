@@ -33,7 +33,7 @@ export const maxDuration = 30
 
 export async function POST(req: Request) {
   const { messages,prompt,array_tools } = await req.json()
-  console.log("array_tools",array_tools)
+  
 
   const tools = Object.fromEntries(
       array_tools.map(({ name }: Tool) => [name, toolRegistry[name]])
