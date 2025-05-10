@@ -60,7 +60,7 @@ export default function MessageContent({ message, handlePdfClick }: MessageConte
                   result: part.toolInvocation.state === "result" ? part.toolInvocation.result : null,
                   state: part.toolInvocation.state,
                 }
-                if (toolInvocation.state === "result" && toolInvocation.toolName === "image"){
+                if (toolInvocation.state === "result" && toolInvocation.toolName === "generateImage") {
                   return (
                     <div key={`tool-${index}`} className="relative my-2 w-fit">
                         <Image 
@@ -68,7 +68,7 @@ export default function MessageContent({ message, handlePdfClick }: MessageConte
                           width={300}
                           height={300}
                           alt={`Generated image ${index}`}
-                          className="object-contain max-h-[400px] w-auto rounded-md"
+                          className="object-contain max-h-[350px] w-auto rounded-md"
                           />
                         <a 
                           href={`${toolInvocation?.result?.imageUrl}`} 
