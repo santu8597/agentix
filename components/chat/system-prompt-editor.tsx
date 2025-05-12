@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { ChevronDown, ChevronUp, Cloud, Terminal, ImageIcon, RefreshCw,Mail,Globe ,Plane,Youtube,Search,Folder,Music,Wand2} from "lucide-react"
+import { ChevronDown, ChevronUp, Cloud, Terminal, ImageIcon, RefreshCw,Mail,Globe ,Plane,Youtube,Search,Folder,Music,Wand2,Calendar} from "lucide-react"
 import { generateText } from "ai"
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 
