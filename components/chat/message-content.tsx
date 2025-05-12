@@ -8,7 +8,7 @@ import rehypeHighlight from "rehype-highlight"
 import { useMarkdownProcessor } from "@/hooks/use-text-processor"
 import ToolInvocationCard from "./tool-invocation-card"
 import { FileUp, Music, Video,DownloadIcon } from "lucide-react"
-
+import VideoResultCard from "@/app/ai-components/youtube"
 interface MessageContentProps {
   message: any
   handlePdfClick: (url: string) => void
@@ -79,6 +79,12 @@ export default function MessageContent({ message, handlePdfClick }: MessageConte
                         </a>
                       </div>
                    )}
+                   if(toolInvocation.state=='result'&& toolInvocation.toolName=="fetchYouTubeVideo")
+                    {
+                const videoData=toolInvocation.result
+                return(<VideoResultCard result={videoData} />)
+              
+                    }
 
                 
                 return (
