@@ -3,10 +3,12 @@ import './globals.css'
 import { Providers } from '@/providers/providers'
 import Navbar from '@/components/navbar'
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Phoenix',
+  description: 'AI Builder',
+  generator: 'Next.js',
+  
 }
+
 
 export default function RootLayout({
   children,
@@ -15,6 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+
+        <link rel="icon" href="/favicon.ico" />
+        
+      </head>
       <body>
         <Providers>
           {/* <Navbar/> */}
