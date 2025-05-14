@@ -11,6 +11,7 @@ import { FileUp, Music, Video,DownloadIcon } from "lucide-react"
 import VideoResultCard from "@/app/ai-components/youtube"
 import FlightOptions from "@/app/ai-components/flight-details"
 import {WeatherCard} from "@/app/ai-components/weather-card"
+import GmailList from "@/app/ai-components/email-list"
 interface MessageContentProps {
   message: any
   handlePdfClick: (url: string) => void
@@ -28,7 +29,6 @@ export default function MessageContent({ message, handlePdfClick }: MessageConte
           {message.parts.map((part: any, index: number) => {
             switch (part.type) {
               case "text":
-               
                 return (
                   <ReactMarkdown key={`text-${index}`} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
                     {part.text}
@@ -99,6 +99,12 @@ export default function MessageContent({ message, handlePdfClick }: MessageConte
                     {
                 const weatherData=toolInvocation.result
                 return(<WeatherCard data={weatherData} />)
+              
+                    }
+                    if(toolInvocation.state=='result'&& toolInvocation.toolName=="readEmail")
+                    {
+                const emailList=toolInvocation.result.emails
+                return(<GmailList emails={emailList} />)
               
                     }
                 
