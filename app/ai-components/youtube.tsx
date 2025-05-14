@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 interface VideoResult {
@@ -8,22 +10,50 @@ interface VideoResult {
   };
 }
 
+// Helper to check if it's a YouTube URL
+const isYouTubeUrl = (url: string) => {
+  return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//.test(url);
+};
+
+// Extract YouTube video ID
+const extractYouTubeId = (url: string) => {
+  const regExp = /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/;
+  const match = url.match(regExp);
+  return match ? match[1] : null;
+};
+
 const VideoResultCard: React.FC<{ result: VideoResult }> = ({ result }) => {
   const { query, video } = result;
+  const isYouTube = isYouTubeUrl(video.url);
+  const youTubeId = isYouTube ? extractYouTubeId(video.url) : null;
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-2xl shadow-md border border-gray-200">
-      <h2 className="text-lg font-semibold text-gray-800 mb-1">Search Query: <span className="text-blue-600">{query}</span></h2>
+    <div className="max-w-md p-6 bg-white rounded-2xl shadow-md border border-gray-200">
+      <h2 className="text-lg font-semibold text-gray-800 mb-1">
+        Search Query: <span className="text-blue-600">{query}</span>
+      </h2>
       <div className="mt-2">
-        <p className="text-gray-700 font-medium mb-2">🎬 {video.title}</p>
-        <a
-          href={video.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block mt-2 px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition"
-        >
-          Watch on YouTube
-        </a>
+        <p className="text-gray-700 font-medium mb-2">🎬 {video?.title}</p>
+
+        {isYouTube && youTubeId ? (
+          <iframe
+            className="w-full h-64 rounded-lg mt-2"
+            src={`https://www.youtube.com/embed/${youTubeId}`}
+            title={video.title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          <video
+            className="w-full rounded-lg mt-2"
+            controls
+            preload="metadata"
+          >
+            <source src={video.url} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
       </div>
     </div>
   );

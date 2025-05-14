@@ -125,7 +125,7 @@ function EmptyState({
         />
         <Bot className="h-16 w-16 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-primary" />
       </div>
-      <h3 className="text-xl font-medium mb-2">Start a conversation</h3>
+      <h3 className="text-xl font-medium mb-2">Start a conversation with Phoenix</h3>
       <p className="text-sm max-w-xs">
         Ask questions, upload images,videos,pdfs,audio or just chat about anything you'd like with the assistant
       </p>

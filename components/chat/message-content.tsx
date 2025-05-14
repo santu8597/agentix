@@ -9,6 +9,8 @@ import { useMarkdownProcessor } from "@/hooks/use-text-processor"
 import ToolInvocationCard from "./tool-invocation-card"
 import { FileUp, Music, Video,DownloadIcon } from "lucide-react"
 import VideoResultCard from "@/app/ai-components/youtube"
+import FlightOptions from "@/app/ai-components/flight-details"
+import {WeatherCard} from "@/app/ai-components/weather-card"
 interface MessageContentProps {
   message: any
   handlePdfClick: (url: string) => void
@@ -86,6 +88,19 @@ export default function MessageContent({ message, handlePdfClick }: MessageConte
               
                     }
 
+
+                    if(toolInvocation.state=='result'&& toolInvocation.toolName=="fetchFlightDetails")
+                    {
+                const flightData=toolInvocation.result
+                return(<FlightOptions data={flightData} />)
+              
+                    }
+                    if(toolInvocation.state=='result'&& toolInvocation.toolName=="getWeather")
+                    {
+                const weatherData=toolInvocation.result
+                return(<WeatherCard data={weatherData} />)
+              
+                    }
                 
                 return (
                   <div key={`tool-${index}`} className="bg-secondary/20 p-2 rounded-md my-2 text-sm">
