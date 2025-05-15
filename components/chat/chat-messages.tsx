@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
 import MessageContent from "./message-content"
-
+import PhoenixLogo from "@/components/frontend/phoenix-logo"
 interface ChatMessagesProps {
   messages: any[]
   isLoading: boolean
@@ -62,14 +62,14 @@ export default function ChatMessages({
                 <Avatar
                   className={cn(
                     "ring-2 transition-all duration-300",
-                    message.role === "user" ? "bg-primary ring-primary/20 mr-2 mt-2" : "bg-secondary ml-2",
+                    message.role === "user" ? "bg-primary ring-primary/20 mr-2 mt-2" : "bg-primary ml-2",
                   )}
                 >
                   <AvatarFallback>
                     {message.role === "user" ? (
                       <User className="h-5 w-5" />
                     ) : (
-                      <Sparkles className="h-5 w-5 text-black" />
+                      <PhoenixLogo className="text-black dark:text-white" width={60} height={60} />
                     )}
                   </AvatarFallback>
                 </Avatar>
@@ -123,7 +123,7 @@ function EmptyState({
           }}
           className="absolute inset-0 bg-primary/10 rounded-full"
         />
-        <Bot className="h-16 w-16 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-primary" />
+        <PhoenixLogo className="text-primary" width={100} height={100} />
       </div>
       <h3 className="text-xl font-medium mb-2">Start a conversation with Phoenix</h3>
       <p className="text-sm max-w-xs">
@@ -173,9 +173,9 @@ function LoadingIndicator() {
       exit={{ opacity: 0 }}
       className="flex items-start gap-3 max-w-[80%]"
     >
-      <Avatar className="bg-secondary ring-2 ring-secondary/20">
+      <Avatar className="bg-secondary ring-2 ring-secondary">
         <AvatarFallback>
-          <Sparkles className="h-5 w-5" />
+          <PhoenixLogo className="text-black dark:text-white" width={60} height={60} />
         </AvatarFallback>
       </Avatar>
 
@@ -191,7 +191,7 @@ function LoadingIndicator() {
               duration: 1.5,
               delay: 0,
             }}
-            className="h-2 w-2 bg-secondary rounded-full"
+            className="h-2 w-2 bg-gray-600 dark:bg-blue-500 rounded-full"
           />
           <motion.div
             animate={{
@@ -203,7 +203,7 @@ function LoadingIndicator() {
               duration: 1.5,
               delay: 0.2,
             }}
-            className="h-2 w-2 bg-secondary rounded-full"
+            className="h-2 w-2 bg-gray-600 dark:bg-blue-500 rounded-full"
           />
           <motion.div
             animate={{
@@ -215,7 +215,7 @@ function LoadingIndicator() {
               duration: 1.5,
               delay: 0.4,
             }}
-            className="h-2 w-2 bg-secondary rounded-full"
+            className="h-2 w-2 bg-gray-600 dark:bg-blue-500 rounded-full"
           />
         </div>
       </div>

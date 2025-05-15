@@ -24,13 +24,12 @@ function getFolderStructure(dirPath: string): any {
 export const analyzeSrcStructureTool = tool({
   
   description: 'Analyzes the src folder of a Next.js project and returns folder/file structure',
-  parameters: z.object({
-    url: z.string().describe('URL of the documentation page to scrape'),
-  }),
+  parameters: z.object({}),
   
   execute: async () => {
-    const srcPath = path.join(process.cwd(), 'src');
+    const srcPath = path.join(process.cwd());
     const structure = getFolderStructure(srcPath);
+    console.log('Folder structure:', JSON.stringify(structure, null, 2));
     return {structure: structure};
   },
 });
