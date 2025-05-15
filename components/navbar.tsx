@@ -68,7 +68,7 @@ export default function Navbar() {
                             
                               <Button
                                 onClick={() => signIn("google")}
-                                className="flex items-center gap-2 bg-white text-gray-800 hover:bg-gray-100 border border-gray-300 px-6 py-5 rounded-md shadow-sm"
+                                className="flex items-center gap-2 bg-white text-gray-800 hover:bg-gray-100 border border-gray-300 px-6 py-5 rounded-md shadow-sm dark:bg-primary dark:hover:bg-primary/90 dark:shadow-[0_0_10px_rgba(36,101,237,0.4)]"
                               >
                                 <svg className="h-5 w-5" viewBox="0 0 24 24">
                                   <path
