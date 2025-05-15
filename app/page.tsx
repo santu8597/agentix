@@ -2,20 +2,19 @@ import { Button } from "@/components/ui/button"
 import { Bot, Database, Shield, Zap, Code, Workflow, Sparkles } from "lucide-react"
 
 import UseCases from "@/components/frontend/use-cases"
-import Navbar from "@/components/frontend/navbar"
+import Navbar from "@/components/navbar"
 import Footer from "@/components/frontend/footer"
 import TypingPromptInput from "@/components/frontend/typing-prompt-input"
 import FramerSpotlight from "@/components/frontend/framer-spotlight"
 import CssGridBackground from "@/components/frontend/css-grid-background"
 import FeaturesSection from "@/components/frontend/features-section"
-import StructuredData from "@/components/frontend/structured-data"
 import ToolsTable from "@/components/frontend/tools-table"
 import PhoenixLogo from "@/components/frontend/phoenix-logo"
 import Link from "next/link"
 export default function Home() {
   return (
     <>
-      <StructuredData />
+      
       <div className="flex min-h-screen flex-col">
         <Navbar />
 

@@ -26,6 +26,7 @@ import ChatMessages from "@/components/chat/chat-messages"
 import FilePreviewArea from "@/components/chat/file-preview-area"
 import PdfViewer from "@/components/chat/pdf-viewer"
 import SystemPromptEditor from "@/components/chat/system-prompt-editor"
+import Navbar from "@/components/navbar"
 
 export default function Chat() {
   
@@ -160,7 +161,7 @@ export default function Chat() {
   return (
     <div className="flex flex-col h-screen bg-background shadow-lg overflow-hidden">
       <div className="flex items-center justify-between px-4 py-2 border-b">
-        <ChatHeader />
+        <Navbar />
       </div>
 
       <div className="flex w-full flex-1 flex-row-reverse overflow-hidden">

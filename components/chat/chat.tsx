@@ -10,7 +10,7 @@ import ChatInput from "./chat-input"
 import ChatMessages from "./chat-messages"
 import FilePreviewArea from "./file-preview-area"
 import PdfViewer from "./pdf-viewer"
-
+import Navbar from '@/components/navbar'
 export default function Chat() {
   
   
@@ -130,7 +130,7 @@ export default function Chat() {
     <div className="flex flex-col w-full mx-auto h-screen bg-background shadow-lg overflow-hidden">
       
       <div className="flex items-center justify-between px-4 py-2 border-b">
-        <ChatHeader />
+        <Navbar />
 
       </div>
 
