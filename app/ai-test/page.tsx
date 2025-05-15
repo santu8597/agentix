@@ -18,7 +18,9 @@ import {
   User,
   Globe,
   Search,
+  RocketIcon
 } from "lucide-react"
+import { DeployAgentModal } from "@/components/blockchain/deploy-modal-agent"
 import { motion, AnimatePresence } from "framer-motion"
 import ChatHeader from "@/components/chat/chat-header"
 import ChatInput from "@/components/chat/chat-input"
@@ -27,13 +29,13 @@ import FilePreviewArea from "@/components/chat/file-preview-area"
 import PdfViewer from "@/components/chat/pdf-viewer"
 import SystemPromptEditor from "@/components/chat/system-prompt-editor"
 import Navbar from "@/components/navbar"
-
+import { Button } from "@/components/ui/button"
 export default function Chat() {
   
   const [systemPrompt, setSystemPrompt] = useState("You are a helpful AI assistant.")
   const [selectedTools, setSelectedTools] = useState<string[]>([])
   const [configApplied, setConfigApplied] = useState(false)
-
+  const [isDeployModalOpen, setIsDeployModalOpen] = useState(false)
 
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, reload } = useChat({
@@ -157,6 +159,13 @@ export default function Chat() {
     // Reset the flag after a short delay
     setTimeout(() => setConfigApplied(false), 1000)
   }
+ const handleOpenDeployModal = () => {
+    setIsDeployModalOpen(true)
+  }
+
+  const handleCloseDeployModal = () => {
+    setIsDeployModalOpen(false)
+  }
 
   return (
     <div className="flex flex-col h-screen bg-background shadow-lg overflow-hidden">
@@ -166,6 +175,10 @@ export default function Chat() {
 
       <div className="flex w-full flex-1 flex-row-reverse overflow-hidden">
         <div className="w-1/3 border-r overflow-auto">
+        <Button onClick={handleOpenDeployModal} className="flex items-center gap-2" variant="outline">
+              <RocketIcon className="h-4 w-4" />
+              Deploy Agent
+            </Button>
           <SystemPromptEditor
             systemPrompt={systemPrompt}
             onSystemPromptChange={setSystemPrompt}
@@ -229,7 +242,12 @@ export default function Chat() {
           />
         </div>
       </div>
-
+           <DeployAgentModal
+        isOpen={isDeployModalOpen}
+        onClose={handleCloseDeployModal}
+        systemPrompt={systemPrompt}
+        selectedTools={selectedTools}
+      />
       {activePdf && <PdfViewer activePdf={activePdf} setActivePdf={setActivePdf} />}
     </div>
   )
