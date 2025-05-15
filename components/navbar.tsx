@@ -9,6 +9,8 @@ import { ThemeToggle } from "@/components/frontend/theme-toggle"
 import { useSession, signIn, signOut } from "next-auth/react"
 import Image from "next/image"
 import PhoenixLogo from "@/components/frontend/phoenix-logo"
+import { useAccount, useConnect, useDisconnect } from "wagmi"
+import { injected } from "wagmi/connectors"
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
    const { data: session, status } = useSession()
@@ -19,7 +21,13 @@ export default function Navbar() {
     { label: "AI-customise", href: "/ai-test" },
     { label: "AI-chat", href: "/chat" },
   ]
-
+const { address, isConnected } = useAccount()
+  const { connect } = useConnect()
+  const { disconnect } = useDisconnect()
+  
+  const truncateAddress = (address: string) => {
+    return `${address.slice(0, 6)}...${address.slice(-4)}`
+  }
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
@@ -93,6 +101,18 @@ export default function Navbar() {
                               </Button>
                             
                           )}
+                          {isConnected ? (
+              <div className="flex flex-col gap-2">
+                <span className="text-sm px-3">{truncateAddress(address!)}</span>
+                <Button variant="outline" size="sm" onClick={() => disconnect()}>
+                  Disconnect
+                </Button>
+              </div>
+            ) : (
+              <Button onClick={() => connect({ connector: injected() })} className="w-full">
+                Connect Wallet
+              </Button>
+            )}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="outline" size="icon" aria-label="Open Menu">
