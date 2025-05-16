@@ -20,6 +20,10 @@ export default function Navbar() {
     { label: "Use Cases", href: "#use-cases" },
     { label: "AI-customise", href: "/ai-test" },
     { label: "AI-chat", href: "/chat" },
+    { label: "MarketPlace", href: "/buy" },
+    { label: "My-agents", href: "/my-agents" },
+
+
   ]
 const { address, isConnected } = useAccount()
   const { connect } = useConnect()
@@ -76,7 +80,7 @@ const { address, isConnected } = useAccount()
                             
                               <Button
                                 onClick={() => signIn("google")}
-                                className="flex items-center gap-2 bg-white text-gray-800 hover:bg-gray-100 border border-gray-300 px-6 py-5 rounded-md shadow-sm dark:bg-primary dark:hover:bg-primary/90 dark:shadow-[0_0_10px_rgba(36,101,237,0.4)]"
+                                className="flex items-center gap-2 bg-white text-gray-800 hover:bg-gray-100 border border-gray-300 px-3 py-5 rounded-md shadow-sm dark:bg-primary dark:hover:bg-primary/90 dark:shadow-[0_0_10px_rgba(36,101,237,0.4)]"
                               >
                                 <svg className="h-5 w-5" viewBox="0 0 24 24">
                                   <path
@@ -103,9 +107,9 @@ const { address, isConnected } = useAccount()
                           )}
                           {isConnected ? (
               <div className="flex flex-col gap-2">
-                <span className="text-sm px-3">{truncateAddress(address!)}</span>
+                {/* <span className="text-sm px-3">{truncateAddress(address!)}</span> */}
                 <Button variant="outline" size="sm" onClick={() => disconnect()}>
-                  Disconnect
+                  Disconnect Wallet
                 </Button>
               </div>
             ) : (

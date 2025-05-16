@@ -1,19 +1,21 @@
 import { MyAgentsList } from "@/components/blockchain/my-agents-list"
 // import { ConnectButton } from "@/components/connect-button"
-
+import Navbar from "@/components/navbar"
 export default function MyAgentsPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="border-b">
+      {/* <header className="border-b">
         <div className="container flex h-16 items-center justify-between">
           <h1 className="text-2xl font-bold">AI Agent Marketplace</h1>
-          {/* <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4">
             <ConnectButton />
-          </div> */}
+          </div>
         </div>
-      </header>
+      </header> */}
+      <Navbar />
+
       <main className="flex-1 container py-8">
-        <div className="flex justify-between items-center mb-8">
+        {/* <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold">My Purchased Agents</h2>
           <div className="flex gap-4">
             <a href="/" className="text-primary hover:underline">
@@ -26,7 +28,7 @@ export default function MyAgentsPage() {
               Sell
             </a>
           </div>
-        </div>
+        </div> */}
         <MyAgentsList />
       </main>
       <footer className="border-t py-6">
