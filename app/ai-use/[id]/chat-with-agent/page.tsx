@@ -54,7 +54,7 @@ export default function Chat({ params }: { params: { id: string } }) {
   const { id } = React.use(params)
 
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    api: `https://agentix2-4swbfl29z-santu8597s-projects.vercel.app/api/ai-use/${id}`,
+    api: `https://agentix2-git-main-santu8597s-projects.vercel.app/api/ai-use/${id}`,
     // body: {
     //   ai_agent: selectedAgent
     // }
