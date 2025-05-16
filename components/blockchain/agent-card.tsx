@@ -108,7 +108,7 @@ export function AgentCard({ agent, isPurchased = false }: AgentCardProps) {
             </div>
             {isPurchased && agent.fileLink && (
               <div>
-                <h4 className="font-medium mb-1">File Link</h4>
+                {/* <h4 className="font-medium mb-1">File Link</h4>
                 <a
                   href={agent.fileLink}
                   target="_blank"
@@ -116,8 +116,8 @@ export function AgentCard({ agent, isPurchased = false }: AgentCardProps) {
                   className="text-sm text-primary hover:underline break-all"
                 >
                   {agent.fileLink}
-                </a>
-                <Link href={`/ai-use/${extractIdFromUrl(agent.fileLink)}/chat-with-agent`}>use your agent</Link>
+                </a> */}
+                <Link className="bg-primary text-white rounded-sm px-3 py-2" href={`/ai-use/${extractIdFromUrl(agent.fileLink)}/chat-with-agent`}>Use This Agent</Link>
               </div>
             )}
             <div>
