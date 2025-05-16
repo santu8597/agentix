@@ -1,9 +1,9 @@
 
 ---
 
-# 🤖 Agentix
+# 🤖 Phoenix
 
-**Agentix** is a flexible and extensible AI agent framework built with **Next.js** and **Vercel AI SDK**. It empowers developers and researchers to **build, test, and run AI agents** by combining custom prompts with dynamic tool execution — all in a sleek, browser-based interface.
+**Phoenix** is a flexible and extensible AI agent framework built with **Next.js** and **Vercel AI SDK**. It empowers developers and researchers to **build, test, and run AI agents** by combining custom prompts with dynamic tool execution — all in a sleek, browser-based interface.
 
 Whether you're crafting a chatbot, autonomous agent, or a task-specific assistant, Agentix lets you wire up AI reasoning with real-world actions through pluggable tools.
 
@@ -69,6 +69,8 @@ GOOGLE_CLIENT_SECRET=your-google-oauth-client-secret
 NEXTAUTH_SECRET=your-nextauth-secret
 NEXTAUTH_URL=http://localhost:3000
 CORSEL_API_KEY=your-corsel-api-key
+NEXT_PUBLIC_PINATA_API_KEY=your-pinata-api-key
+NEXT_PUBLIC_PINATA_SECRET_API_KEY=your-pinata-api-secret
 ```
 
 ### 4. Start the dev server
@@ -115,10 +117,10 @@ MIT License. Fork freely, improve fearlessly, deploy confidently.
 
 ---
 
-## 💡 Why Agentix?
+## 💡 Why Phoenix?
 
 Because building smart agents should be as flexible as your ideas.
-**Agentix** is your home lab for testing real AI workflows — not just chat.
+**Phoenix** is your home lab for testing real AI workflows — not just chat.
 
 ---
 
