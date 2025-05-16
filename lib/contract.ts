@@ -2,7 +2,7 @@ import { parseEther } from "viem"
 import { sepolia } from "wagmi/chains"
 
 // Contract address - replace with your deployed contract address
-export const CONTRACT_ADDRESS = "0x133Ee27f5b4a99415B80A0712c8390A32B531983"
+export const CONTRACT_ADDRESS = "0xdE8D05bedf8c06dA2AfD00d6a5Bb654981CE1186"
 
 // Contract ABI based on your smart contract
 export const CONTRACT_ABI =[

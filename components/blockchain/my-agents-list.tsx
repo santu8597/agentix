@@ -10,11 +10,7 @@ export function MyAgentsList() {
   const { isConnected,address } = useAccount()
   const [isLoading, setIsLoading] = useState(true)
 
-  const {
-    data: myAgents,
-    isError,
-    isLoading: isLoadingAgents,
-  } = useReadContract({
+  const result = useReadContract({
     address: CONTRACT_ADDRESS,
     abi: CONTRACT_ABI,
     functionName: "getMyPurchasedAgents",
@@ -23,6 +19,11 @@ export function MyAgentsList() {
       enabled: isConnected,
     },
   })
+  const {
+    data: myAgents,
+    isError,
+    isLoading: isLoadingAgents,
+  } = result as { data: Agent[]; isError: boolean; isLoading: boolean }
 
   useEffect(() => {
     if (!isConnected || isLoadingAgents) {
