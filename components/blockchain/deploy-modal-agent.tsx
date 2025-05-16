@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+
 import { CONTRACT_ABI, CONTRACT_ADDRESS, convertToWei } from "@/lib/contract"
 import { generateRandomId, uploadToPinata } from "@/lib/pinata"
 import { useToast } from "@/components/ui/use-toast"
@@ -39,7 +39,7 @@ export function DeployAgentModal({ isOpen, onClose, systemPrompt, selectedTools 
     imageLink: "",
     price: "",
     prompt: systemPrompt, // Pre-filled with the current system prompt
-    toolType: selectedTools.length > 0 ? selectedTools[0] : "weatherTool", // Pre-filled with the first selected tool
+    toolType: selectedTools, // Pre-filled with the first selected tool
   })
 
   const { data: hash, isPending, writeContract } = useWriteContract()
@@ -53,9 +53,9 @@ export function DeployAgentModal({ isOpen, onClose, systemPrompt, selectedTools 
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleRadioChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, toolType: value }))
-  }
+  // const handleRadioChange = (value: string) => {
+  //   setFormData((prev) => ({ ...prev, toolType: value }))
+  // }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -110,7 +110,7 @@ export function DeployAgentModal({ isOpen, onClose, systemPrompt, selectedTools 
           imageLink: "",
           price: "",
           prompt: systemPrompt,
-          toolType: selectedTools.length > 0 ? selectedTools[0] : "weatherTool",
+          toolType: selectedTools,
         })
 
         toast({
@@ -225,18 +225,18 @@ export function DeployAgentModal({ isOpen, onClose, systemPrompt, selectedTools 
 
             <div className="grid gap-2">
               <Label>Tool Type</Label>
-              <RadioGroup
+              {/* <RadioGroup
                 value={formData.toolType}
                 onValueChange={handleRadioChange}
                 className="flex flex-col space-y-1"
-              >
+              > */}
                 {selectedTools.map((tool) => (
                   <div key={tool} className="flex items-center space-x-2">
-                    <RadioGroupItem value={tool} id={tool} />
+                    {/* <RadioGroupItem value={tool} id={tool} /> */}
                     <Label htmlFor={tool}>{tool}</Label>
                   </div>
                 ))}
-                {selectedTools.length === 0 && (
+                {/* {selectedTools.length === 0 && (
                   <>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="weatherTool" id="weatherTool" />
@@ -251,8 +251,8 @@ export function DeployAgentModal({ isOpen, onClose, systemPrompt, selectedTools 
                       <Label htmlFor="emailTool">Email Tool</Label>
                     </div>
                   </>
-                )}
-              </RadioGroup>
+                )} */}
+              {/* </RadioGroup> */}
             </div>
           </div>
           <DialogFooter>
