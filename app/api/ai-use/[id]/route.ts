@@ -47,7 +47,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   }
   return acc;
 }, {} as Record<string, any>);
-console.log('Fetched tools:', tools);
+// console.log('Fetched tools:', tools);
     const result = streamText({
       model: google("gemini-2.0-flash"),
         system: prompt,
