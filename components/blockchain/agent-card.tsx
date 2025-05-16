@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { CONTRACT_ABI, CONTRACT_ADDRESS, type Agent } from "@/lib/contract"
 import { useToast } from "@/hooks/use-toast"
-
+import Link from "next/link"
 interface AgentCardProps {
   agent: Agent
   isPurchased?: boolean
@@ -19,6 +19,10 @@ export function AgentCard({ agent, isPurchased = false }: AgentCardProps) {
   const { toast } = useToast()
   const { isConnected } = useAccount()
   const [showDetails, setShowDetails] = useState(false)
+  const extractIdFromUrl = (url:string) => {
+  const parts = url.split("/");
+  return parts[parts.length - 1];
+}
 
   const { data: hash, isPending, writeContract } = useWriteContract()
 
@@ -51,8 +55,8 @@ export function AgentCard({ agent, isPurchased = false }: AgentCardProps) {
 
   return (
     <>
-      <Card className="overflow-hidden">
-        <div className="relative h-48 w-full">
+      <Card className="overflow-hidden h-full w-72">
+        <div className="relative h-36">
           <Image
             src={agent.imageLink || "/placeholder.svg?height=200&width=400"}
             alt={agent.agentName}
@@ -113,6 +117,7 @@ export function AgentCard({ agent, isPurchased = false }: AgentCardProps) {
                 >
                   {agent.fileLink}
                 </a>
+                <Link href={`/ai-use/${extractIdFromUrl(agent.fileLink)}/chat-with-agent`}>use your agent</Link>
               </div>
             )}
             <div>

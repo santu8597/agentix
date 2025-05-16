@@ -15,20 +15,10 @@ export default function MyAgentsPage() {
       <Navbar />
 
       <main className="flex-1 container py-8">
-        {/* <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold">My Purchased Agents</h2>
-          <div className="flex gap-4">
-            <a href="/" className="text-primary hover:underline">
-              Home
-            </a>
-            <a href="/buy" className="text-primary hover:underline">
-              Buy
-            </a>
-            <a href="/sell" className="text-primary hover:underline">
-              Sell
-            </a>
-          </div>
-        </div> */}
+          
+        </div>
         <MyAgentsList />
       </main>
       <footer className="border-t py-6">
