@@ -1,4 +1,5 @@
 
+<img src="https://github.com/santu8597/agentix/blob/f002287fbfffdc709e761328642883cafb50837d/public/08ad305b-ac32-4950-9cc7-270899a65ccf.jpeg" alt="Demo" width="500" />
 ---
 
 # 🤖 Phoenix
