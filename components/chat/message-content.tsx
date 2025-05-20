@@ -12,6 +12,7 @@ import VideoResultCard from "@/app/ai-components/youtube"
 import FlightOptions from "@/app/ai-components/flight-details"
 import {WeatherCard} from "@/app/ai-components/weather-card"
 import GmailList from "@/app/ai-components/email-list"
+import { DoctorProfileCard } from "@/app/ai-components/doctors-list"
 interface MessageContentProps {
   message: any
   handlePdfClick: (url: string) => void
@@ -107,7 +108,21 @@ export default function MessageContent({ message, handlePdfClick }: MessageConte
                 return(<GmailList emails={emailList} />)
               
                     }
-                
+                if (toolInvocation.state=='result'&& toolInvocation.toolName=="fetchDoctors")
+                {
+                  const doctorApiResponse=toolInvocation.result
+                  console.log(doctorApiResponse)
+                  return( <><div className="flex flex-col gap-4">{doctorApiResponse?.results?.length > 0 ? (
+    doctorApiResponse.results.map((doctor, index) => (
+      <DoctorProfileCard key={doctor.place_id || index} doctor={doctor} />
+    ))
+  ) : (
+    <p className="text-center text-muted-foreground">No doctors found.</p>
+  )}
+  </div>
+  </>
+                  )              
+                }
                 return (
                   <div key={`tool-${index}`} className="bg-secondary/20 p-2 rounded-md my-2 text-sm">
                     <div className="font-semibold text-xs mb-1">Tool: {part.toolInvocation.toolName}</div>
