@@ -13,6 +13,8 @@ import {scrapeDocsTool} from "@/lib/tools/web-scrap"
 import {analyzeSrcStructureTool} from "@/lib/tools/folder-structure"
 import { musicMood } from "@/lib/tools/music"
 import { googleCalendarManager } from "@/lib/tools/calender"
+import { fetchHotelDetails } from '@/lib/tools/hotel';
+import { fetchDoctors } from '@/lib/tools/health';
 interface Tool {
     name: keyof typeof toolRegistry;
     tool: string;
@@ -30,7 +32,9 @@ const toolRegistry = {
   scrapeDocsTool,
   analyzeSrcStructureTool,
   musicMood,
-  googleCalendarManager
+  googleCalendarManager,
+  fetchDoctors,
+  fetchHotelDetails
 }
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   const { id } =await params;

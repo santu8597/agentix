@@ -8,7 +8,9 @@ import {fetchFlightDetails} from "@/lib/tools/flight"
 import {sendEmail} from "@/lib/tools/auth-mail"
 import {readEmail} from "@/lib/tools/get-mail"
 import {fetchYouTubeVideo} from "@/lib/tools/youtube"
-
+import { googleCalendarManager } from "@/lib/tools/calender"
+import { fetchDoctors } from "@/lib/tools/health"
+import { fetchHotelDetails } from "@/lib/tools/hotel"
 export const maxDuration = 30
 
 export async function POST(req: Request) {
@@ -20,14 +22,17 @@ export async function POST(req: Request) {
     
     
     tools: {
-      weather: getWeather,
+      getWeather: getWeather,
       webSearch: webSearch,
-      shell: executeShell,
-      email: sendEmail,
-      image: generateImage,
-      flight: fetchFlightDetails,
+      executeShell: executeShell,
+      sendEmail: sendEmail,
+      generateImage: generateImage,
+      fetchFlightDetails: fetchFlightDetails,
       readEmail: readEmail,
-      youtube: fetchYouTubeVideo,
+      fetchYouTubeVideo: fetchYouTubeVideo,
+      googleCalendarManager:googleCalendarManager,
+      fetchHotelDetails:fetchHotelDetails,
+      fetchDoctors:fetchDoctors
     },
     
     maxSteps: 5,
