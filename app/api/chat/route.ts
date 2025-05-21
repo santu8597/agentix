@@ -1,39 +1,28 @@
 import { google } from "@ai-sdk/google"
 import { streamText } from "ai"
-import { getWeather } from "@/lib/tools/weather"
-import { webSearch } from "@/lib/tools/web-search"
-import {executeShell} from "@/lib/tools/shell"
-import { generateImage } from "@/lib/tools/image"
-import {fetchFlightDetails} from "@/lib/tools/flight"
-import {sendEmail} from "@/lib/tools/auth-mail"
-import {readEmail} from "@/lib/tools/get-mail"
-import {fetchYouTubeVideo} from "@/lib/tools/youtube"
-import { googleCalendarManager } from "@/lib/tools/calender"
-import { fetchDoctors } from "@/lib/tools/health"
-import { fetchHotelDetails } from "@/lib/tools/hotel"
+import { toolRegistry } from "@/lib/tool-registry"
 export const maxDuration = 30
 
 export async function POST(req: Request) {
   const { messages } = await req.json()
+
+  function expandToolRegistry(toolRegistry:Object) {
+  const expanded = {};
+  for (const key in toolRegistry) {
+    if (toolRegistry.hasOwnProperty(key)) {
+      expanded[key] = toolRegistry[key];
+    }
+  }
+  return expanded;
+}
+const tools = expandToolRegistry(toolRegistry);
   const result = streamText({
     model: google("gemini-2.0-flash"),
-    system: "You are a helpful assistant that can search the web and provide weather information.and open apps using shell commands.",
+    system: "You are a helpful assistant that can use tools to answer questions. You can use the tools to get information, perform actions, and assist the user. You are not allowed to browse the web or access external information directly. You can only use the tools provided to you.",
     messages,
     
     
-    tools: {
-      getWeather: getWeather,
-      webSearch: webSearch,
-      executeShell: executeShell,
-      sendEmail: sendEmail,
-      generateImage: generateImage,
-      fetchFlightDetails: fetchFlightDetails,
-      readEmail: readEmail,
-      fetchYouTubeVideo: fetchYouTubeVideo,
-      googleCalendarManager:googleCalendarManager,
-      fetchHotelDetails:fetchHotelDetails,
-      fetchDoctors:fetchDoctors
-    },
+    tools: tools,
     
     maxSteps: 5,
      // Allow multiple tool calls in a single conversation turn
