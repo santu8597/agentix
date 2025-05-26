@@ -8,7 +8,7 @@ interface Tool {
 export const maxDuration = 30
 
 export async function POST(req: Request) {
-  const { messages,prompt,array_tools } = await req.json()
+  const { messages,prompt,array_tools,wallet_address,wallet_balance } = await req.json()
   
 
   const tools = Object.fromEntries(
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
    
   const result = streamText({
     model: google("gemini-2.0-flash"),
-    system: prompt,
+    system: prompt+`if some one asks about thier wallet adress ,the adress is ${wallet_address} and the balance is ${wallet_balance}`,
     messages,
     
     

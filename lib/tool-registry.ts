@@ -12,6 +12,9 @@ import { musicMood } from "@/lib/tools/music"
 import { googleCalendarManager } from "@/lib/tools/calender"
 import { fetchDoctors } from "@/lib/tools/health"
 import { fetchHotelDetails } from "@/lib/tools/hotel"
+import {nftTool} from "@/lib/tools/nft-mint"
+import {MoneySendTool} from "@/lib/tools/send-money"
+import {distributePaymentTool} from "@/lib/tools/distribute-money"
 
 export const toolRegistry = {
   getWeather,
@@ -27,5 +30,8 @@ export const toolRegistry = {
   musicMood,
   googleCalendarManager,
   fetchDoctors,
-  fetchHotelDetails
+  fetchHotelDetails,
+  nftTool,
+  MoneySendTool,
+  distributePaymentTool
 }

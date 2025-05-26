@@ -12,15 +12,110 @@ import VideoResultCard from "@/app/ai-components/youtube"
 import FlightOptions from "@/app/ai-components/flight-details"
 import {WeatherCard} from "@/app/ai-components/weather-card"
 import GmailList from "@/app/ai-components/email-list"
+import { CONTRACT_ADDRESS, CONTRACT_ABI,CONTRACT_ABI_2,CONTRACT_ADDRESS_2 } from "@/lib/contract2"
+import { useWriteContract, useWaitForTransactionReceipt } from "wagmi"
 import { DoctorProfileCard } from "@/app/ai-components/doctors-list"
 import HotelPropertyCard from "@/app/ai-components/hotel-list"
+import { useState,useEffect } from "react"
+import { parseEther } from "viem"
 interface MessageContentProps {
   message: any
   handlePdfClick: (url: string) => void
 }
 
 export default function MessageContent({ message, handlePdfClick }: MessageContentProps) {
+   const [nftData, setNftData] = useState<null | {
+  to: string,
+  name: string,
+  imageUrl: string
+}>(null)
+
+const [paymentData, setPaymentData] = useState<null | {
+  to: string,
+  amount: string
+}>(null)
+
+
+const [distributePaymentData, setDistributePaymentData] = useState<null | {
+  amount: string,
+  addresses: string[]
+}>(null)
   const content = useMarkdownProcessor(message.content)
+const { data: hash, writeContract } = useWriteContract()
+  const { isLoading: txPending, isSuccess: txSuccess } = useWaitForTransactionReceipt({ hash })
+
+
+
+  useEffect(() => {
+  const sendTransaction = async () => {
+    if (!nftData) return
+    try {
+      const { to, name, imageUrl } = nftData
+      const tx = await writeContract({
+        address: CONTRACT_ADDRESS,
+        abi:CONTRACT_ABI,
+        functionName: "mintNFT",
+        args: [to, name, imageUrl],
+      })
+      console.log("Transaction sent:", tx)
+    } catch (error) {
+      console.error("Transaction error:", error)
+    }
+  }
+
+  sendTransaction()
+}, []) 
+
+
+
+useEffect(() => {
+  const sendTransaction = async () => {
+    if (!paymentData) return
+    try {
+      let { to, amount } = paymentData
+      amount=amount.toString()
+      const tx = await writeContract({
+        address: CONTRACT_ADDRESS_2,
+        abi:CONTRACT_ABI_2,
+        functionName: "sendEther",
+        args: [to],
+        value: parseEther(amount),
+      })
+      console.log("Transaction sent:", tx)
+    } catch (error) {
+      console.error("Transaction error:", error)
+    }
+  }
+
+  sendTransaction()
+}, []) 
+
+
+
+
+useEffect(() => {
+  const sendTransaction = async () => {
+    if (!distributePaymentData) return
+    try {
+      const { amount,addresses } = distributePaymentData
+  
+      const tx = await writeContract({
+        address: CONTRACT_ADDRESS,
+        abi:CONTRACT_ABI,
+        functionName: "distributePayment",
+        args: [addresses],
+        value: parseEther(amount),
+      })
+      console.log("Transaction sent:", tx)
+    } catch (error) {
+      console.error("Transaction error:", error)
+    }
+  }
+
+  sendTransaction()
+}, []) 
+
+
 
   // Helper function to render message content based on parts
   const renderMessageContent = (message: any) => {
@@ -144,6 +239,45 @@ export default function MessageContent({ message, handlePdfClick }: MessageConte
     </>
   )
 }
+
+    if (toolInvocation.state === "result" && toolInvocation.toolName === "nftTool") {
+                    const { to, name, imageUrl } = toolInvocation.result.data
+                    if (!txPending && !txSuccess && !nftData) {
+                        setNftData({ to, name, imageUrl })
+                     }
+                  return (<>
+                          <div className="font-semibold text-xs mb-1">Tool: {part.toolInvocation.toolName}</div>
+                         {txPending && <p className="text-xs text-muted-foreground">Transaction is pending...</p>}
+                          {txSuccess && <p className="text-xs text-green-500">Transaction successful!</p>}
+                        </>
+                      )}
+if (toolInvocation.state === "result" && toolInvocation.toolName === "MoneySendTool") {
+                    const { to, amount } = toolInvocation.result.data
+                    if (!txPending && !txSuccess && !paymentData) {
+                        setPaymentData({ to, amount })
+                     }
+                  return (<>
+                          <div className="font-semibold text-xs mb-1">Tool: {part.toolInvocation.toolName}</div>
+                         {txPending && <p className="text-xs text-muted-foreground">Transaction is pending...</p>}
+                          {txSuccess && <p className="text-xs text-green-500">Transaction successful!</p>}
+                        </>
+                      )}
+
+
+if (toolInvocation.state === "result" && toolInvocation.toolName === "distributePaymentTool") {
+                    const { addresses, amount } = toolInvocation.result.data
+                    if (!txPending && !txSuccess && !distributePaymentData) {
+                        setDistributePaymentData({ addresses, amount })
+                     }
+                  return (<>
+                          <div className="font-semibold text-xs mb-1">Tool: {part.toolInvocation.toolName}</div>
+                         {txPending && <p className="text-xs text-muted-foreground">Transaction is pending...</p>}
+                          {txSuccess && <p className="text-xs text-green-500">Transaction successful!</p>}
+                        </>
+                      )}
+
+
+
 
                 return (
                   <div key={`tool-${index}`} className="bg-secondary/20 p-2 rounded-md my-2 text-sm">

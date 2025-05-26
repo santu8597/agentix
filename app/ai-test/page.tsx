@@ -30,8 +30,15 @@ import PdfViewer from "@/components/chat/pdf-viewer"
 import SystemPromptEditor from "@/components/chat/system-prompt-editor"
 import Navbar from "@/components/navbar"
 import { Button } from "@/components/ui/button"
+import { useAccount,useBalance } from "wagmi"
+import { baseSepolia } from "viem/chains"
+import { sepolia } from "viem/chains"
 export default function Chat() {
-  
+   const { address, isConnected } = useAccount()
+   const result = useBalance({
+    address: address,
+    chainId: sepolia.id,
+  })
   const [systemPrompt, setSystemPrompt] = useState("You are a helpful AI assistant.")
   const [selectedTools, setSelectedTools] = useState<string[]>([])
   const [configApplied, setConfigApplied] = useState(false)
@@ -44,6 +51,8 @@ export default function Chat() {
       
       prompt: systemPrompt,
       array_tools: selectedTools.map((toolId) => ({ name: toolId, tool: toolId })),
+      wallet_address: address || "",
+      wallet_balance: result.data?.formatted || "0",
     },
   })
 
