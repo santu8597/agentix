@@ -1,6 +1,8 @@
 import { AgentList } from "@/components/blockchain/agent-list"
 // import { ConnectButton } from "@/components/connect-button"
 import Navbar from "@/components/navbar"
+import { cn } from "@/lib/utils"
+import { GridPattern } from "@/components/magicui/grid-pattern"
 export default function BuyPage() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -11,6 +13,10 @@ export default function BuyPage() {
         </div>
       </header> */}
       <Navbar/>
+       <GridPattern className={cn(
+                "[mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]",
+                "inset-x-auto inset-y-auto  h-[300%] skew-y-6")}/>
+            
       <main className="flex-1 container py-8">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold">Browse AI Agents</h2>

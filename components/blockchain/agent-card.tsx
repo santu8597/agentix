@@ -77,9 +77,11 @@ export function AgentCard({ agent, isPurchased = false }: AgentCardProps) {
               className="h-40 w-full object-cover rounded-xl group-hover/card:shadow-xl"
             />
           </CardItem>
-          <CardItem translateZ="50" className="flex justify-between items-center mt-4">
+          <CardItem translateZ="50" className="flex flex-row justify-between items-center mt-4 gap-6">
+            
             <div className="font-medium text-lg">{formatEther(agent.price)} ETH</div>
             <div className="text-sm text-muted-foreground">ID: {agent.id.toString()}</div>
+            
           </CardItem>
           <div className="flex justify-between items-center mt-6">
             {isPurchased ? (

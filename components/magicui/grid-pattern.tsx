@@ -14,8 +14,8 @@ interface GridPatternProps extends React.SVGProps<SVGSVGElement> {
 }
 
 export function GridPattern({
-  width = 40,
-  height = 40,
+  width = 80,
+  height = 80,
   x = -1,
   y = -1,
   strokeDasharray = "0",
