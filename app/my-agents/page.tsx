@@ -17,10 +17,10 @@ export default function MyAgentsPage() {
       
       <main className="flex-1 container py-8">
          
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center">
           <h2 className="text-3xl font-bold">My Purchased Agents</h2>
         </div>
-        <div className="rid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
+        <div className="">
           <MyAgentsList />
         </div>
       </main>

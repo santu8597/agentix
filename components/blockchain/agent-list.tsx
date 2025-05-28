@@ -78,7 +78,7 @@ export function AgentList() {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-24">
       {agents.map((agent: Agent) => (
         <AgentCard key={agent.id.toString()} agent={agent} />
       ))}
