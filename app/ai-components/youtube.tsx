@@ -28,7 +28,7 @@ const VideoResultCard: React.FC<{ result: VideoResult }> = ({ result }) => {
   const youTubeId = isYouTube ? extractYouTubeId(video.url) : null;
 
   return (
-    <div className="max-w-md p-6 bg-white rounded-2xl shadow-md border border-gray-200">
+    <div className="max-w-md p-6 bg-white dark:bg-black rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 my-2">
       <h2 className="text-lg font-semibold text-gray-800 mb-1">
         Search Query: <span className="text-blue-600">{query}</span>
       </h2>
