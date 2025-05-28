@@ -29,11 +29,11 @@ const VideoResultCard: React.FC<{ result: VideoResult }> = ({ result }) => {
 
   return (
     <div className="max-w-md p-6 bg-white dark:bg-black rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 my-2">
-      <h2 className="text-lg font-semibold text-gray-800 mb-1">
+      <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
         Search Query: <span className="text-blue-600">{query}</span>
       </h2>
       <div className="mt-2">
-        <p className="text-gray-700 font-medium mb-2">🎬 {video?.title}</p>
+        <p className="text-gray-700 dark:text-white font-medium mb-2">🎬 {video?.title}</p>
 
         {isYouTube && youTubeId ? (
           <iframe
