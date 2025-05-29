@@ -178,22 +178,23 @@ export default function Chat() {
 
   return (
     <div className="flex flex-col h-screen bg-background shadow-lg overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 border-b">
+      {/* <div className="flex items-center justify-between px-4 py-2 border-b"> */}
         <Navbar />
-      </div>
+      {/* </div> */}
 
       <div className="flex w-full flex-1 flex-row-reverse overflow-hidden">
         <div className="w-1/3 border-r overflow-auto">
-        <Button onClick={handleOpenDeployModal} className="flex items-center gap-2" variant="outline">
+        {/* <Button onClick={handleOpenDeployModal} className="flex items-center gap-2" variant="outline">
               <RocketIcon className="h-4 w-4" />
               Deploy Agent
-            </Button>
+            </Button> */}
           <SystemPromptEditor
             systemPrompt={systemPrompt}
             onSystemPromptChange={setSystemPrompt}
             selectedTools={selectedTools}
             onToolsChange={setSelectedTools}
             onApplyConfig={handleApplyConfig}
+            handleOpenDeployModal={handleOpenDeployModal}
           />
         </div>
 

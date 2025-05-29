@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { FileUp, Send, Loader2 } from "lucide-react"
+import { FileUp, Send, Loader2,Paperclip } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import type { RefObject } from "react"
@@ -40,7 +40,7 @@ export default function ChatInput({
               className="absolute left-2 bottom-4 h-8 w-8 text-muted-foreground hover:text-primary transition-colors"
               onClick={() => fileInputRef.current?.click()}
             >
-              <FileUp className="h-5 w-5" />
+              <Paperclip className="h-5 w-5 text-white" />
               <span className="sr-only">Upload file</span>
             </Button>
           </div>

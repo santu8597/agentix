@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { ChevronDown, ChevronUp, Cloud, Terminal, ImageIcon, RefreshCw,Mail,Globe ,Plane,Youtube,Search,Folder,Music,Wand2,Calendar, Heart, Hotel,Factory,DollarSign} from "lucide-react"
+import { ChevronDown, ChevronUp,RocketIcon, Cloud, ImageIcon, RefreshCw,Mail,Globe ,Plane,Youtube,Search,Music,Wand2,Calendar, Heart, Hotel,DollarSign,Wallet,Users} from "lucide-react"
 import { generateText } from "ai"
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 
@@ -22,7 +22,8 @@ interface SystemPromptEditorProps {
   onSystemPromptChange: (prompt: string) => void
   selectedTools: string[]
   onToolsChange: (tools: string[]) => void
-  onApplyConfig: () => void
+  onApplyConfig: () => void,
+  handleOpenDeployModal: () => void
 }
 
 
@@ -33,6 +34,7 @@ export default function SystemPromptEditor({
   selectedTools,
   onToolsChange,
   onApplyConfig,
+  handleOpenDeployModal
 }: SystemPromptEditorProps) {
   const [isExpanded, setIsExpanded] = useState(true)
   const [isGenerating, setIsGenerating] = useState(false)
@@ -51,9 +53,9 @@ export default function SystemPromptEditor({
 
   const availableTools = [
     { id: "getWeather", name: "Weather Tool", icon: <Cloud className="h-4 w-4 mr-2" /> },
-    { id: "executeShell", name: "Shell Tool", icon: <Terminal className="h-4 w-4 mr-2" /> },
+    // { id: "executeShell", name: "Shell Tool", icon: <Terminal className="h-4 w-4 mr-2" /> },
     { id: "generateImage", name: "Image Generation Tool", icon: <ImageIcon className="h-4 w-4 mr-2" /> },
-    { id: "analyzeSrcStructureTool", name: "Folder-Structure Tool", icon: <Folder className="h-4 w-4 mr-2" /> },
+    // { id: "analyzeSrcStructureTool", name: "Folder-Structure Tool", icon: <Folder className="h-4 w-4 mr-2" /> },
     { id: "musicMood", name: "Music Mood Tool", icon: <Music className="h-4 w-4 mr-2" /> },
     { id: "sendEmail", name: "Send Email Tool", icon: <Mail className="h-4 w-4 mr-2" /> },
     { id: "readEmail", name: "Read Email Tool", icon: <Mail className="h-4 w-4 mr-2" /> },
@@ -65,9 +67,9 @@ export default function SystemPromptEditor({
     { id: "googleCalendarManager", name: "Calender Tool", icon: <Calendar className="h-4 w-4 mr-2" /> },
     { id: "fetchDoctors", name: "Finding Doctors Tool", icon: <Heart className="h-4 w-4 mr-2" /> },
     { id: "fetchHotelDetails", name: "Hotel Tool", icon: <Hotel className="h-4 w-4 mr-2" /> },
-    { id: "nftTool", name: "NFT Tool", icon: <Factory className="h-4 w-4 mr-2" /> },
+    { id: "nftTool", name: "NFT Tool", icon: <Wallet className="h-4 w-4 mr-2" /> },
     { id: "MoneySendTool", name: "Send Money Tool", icon: <DollarSign className="h-4 w-4 mr-2" /> },
-    { id: "distributePaymentTool", name: "Distribute Money Tool", icon: <DollarSign className="h-4 w-4 mr-2" /> },
+    { id: "distributePaymentTool", name: "Distribute Money Tool", icon: <Users className="h-4 w-4 mr-2" /> },
   ]
 
   const handleToolToggle = (toolId: string) => {
@@ -94,12 +96,19 @@ export default function SystemPromptEditor({
         <CardContent>
           <div className="space-y-4">
             <div>
+              <div className="flex gap-2">
+              <Button className="" disabled={isGenerating} onClick={handleAiGenerate}>{isGenerating?"Generating...":<>Generate <Wand2 className="h-4 w-4" /> </>}</Button>
+              <Button onClick={handleOpenDeployModal} className="flex items-center" variant="outline">
+              Deploy Agent
+              <RocketIcon className="h-4 w-4" />
+            </Button>
+              </div>
               <Label htmlFor="system-prompt">System Prompt</Label>
-              <Button className="ml-4" disabled={isGenerating} onClick={handleAiGenerate}>{isGenerating?"Generating...":<>Generate <Wand2 className="h-4 w-4" /> </>}</Button>
+              
               <Textarea
                 id="system-prompt"
                 placeholder="Enter system instructions for the AI..."
-                className="mt-4 min-h-[270px] max-h-[270px] overflow-y-scroll"
+                className="mt-4 min-h-[205px] max-h-[205px] overflow-y-scroll"
                 value={systemPrompt}
                 onChange={(e) => onSystemPromptChange(e.target.value)}
               />

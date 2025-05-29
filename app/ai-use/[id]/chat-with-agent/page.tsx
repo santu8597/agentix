@@ -167,10 +167,10 @@ export default function Chat({ params }: { params: { id: string } }) {
   return (
     <div className="flex flex-col w-full mx-auto h-screen bg-background shadow-lg overflow-hidden">
       
-      <div className="flex items-center justify-between px-4 py-2 border-b">
+      {/* <div className="flex items-center justify-between px-4 py-2 border-b"> */}
         <Navbar />
 
-      </div>
+      {/* </div> */}
 
       <ChatMessages
         messages={messages}
