@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { ChevronDown, ChevronUp,RocketIcon, Cloud, ImageIcon, RefreshCw,Mail,Globe ,Plane,Youtube,Search,Music,Wand2,Calendar, Heart, Hotel,DollarSign,Wallet,Users} from "lucide-react"
 import { generateText } from "ai"
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
-
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 const google = createGoogleGenerativeAI({
   apiKey: "AIzaSyAVQpop5MJZpJg2x3DhEfWs4nCFmOQ-Op0",
 });
@@ -93,6 +93,7 @@ export default function SystemPromptEditor({
       </CardHeader>
 
       {isExpanded && (
+        <BackgroundBeamsWithCollision>
         <CardContent>
           <div className="space-y-4">
             <div>
@@ -139,6 +140,7 @@ export default function SystemPromptEditor({
             </Button>
           </div>
         </CardContent>
+        </BackgroundBeamsWithCollision>
       )}
     </Card>
   )

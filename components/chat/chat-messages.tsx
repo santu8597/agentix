@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
 import MessageContent from "./message-content"
 import PhoenixLogo from "@/components/frontend/phoenix-logo"
+import Orb from "@/components/ui/orb"
+import Particles from "@/components/ui/particles"
 interface ChatMessagesProps {
   messages: any[]
   isLoading: boolean
@@ -40,6 +42,23 @@ export default function ChatMessages({
 
   return (
     <ScrollArea className="flex-1 px-4 overflow-y-auto" ref={scrollAreaRef}>
+      <div style={{ width: '100%', height: '550px', position: 'absolute' }}>
+  <Particles
+    particleColors={['#4f6af3', '#c2caf5']}
+    particleCount={200}
+    particleSpread={10}
+    speed={0.1}
+    particleBaseSize={100}
+    moveParticlesOnHover={true}
+    alphaParticles={false}
+    disableRotation={true}
+  />
+</div>
+      {messages.length!==0 && <div className="mt-8" style={{ width: '100%', height: '500px', position: 'absolute' }}>
+  <Orb hoverIntensity={0.5} rotateOnHover={true} hue={0} forceHoverState={false}/>
+</div>}
+       
+
       <AnimatePresence>
         {messages.length === 0 ? (
           <EmptyState handleSuggestedPrompt={handleSuggestedPrompt} formRef={formRef} fileInputRef={fileInputRef} />
@@ -53,6 +72,7 @@ export default function ChatMessages({
               exit="exit"
               className={cn("flex w-full mb-4", message.role === "user" ? "justify-end" : "justify-start")}
             >
+             
               <div
                 className={cn(
                   "flex items-start gap-3 max-w-[80%]",

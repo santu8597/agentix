@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import Orb from '@/components/ui/orb';
+
 import { useChat } from "@ai-sdk/react"
 import { useEffect, useRef, useState } from "react"
 import {
