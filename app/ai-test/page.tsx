@@ -5,21 +5,7 @@ import type React from "react"
 import { useChat } from "@ai-sdk/react"
 import { useEffect, useRef, useState } from "react"
 import {
-  Loader2,
-  Terminal,
-  Code,
-  Cloud,
-  ImageIcon,
-  Music,
-  Twitter,
-  Mail,
-  FileText,
-  Shield,
-  User,
-  Globe,
-  Search,
-  RocketIcon
-} from "lucide-react"
+ Loader2} from "lucide-react"
 import { DeployAgentModal } from "@/components/blockchain/deploy-modal-agent"
 import { motion, AnimatePresence } from "framer-motion"
 import ChatHeader from "@/components/chat/chat-header"
