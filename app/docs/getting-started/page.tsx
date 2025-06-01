@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, ArrowRight, Bot, Settings, Play } from "lucide-react"
-
+import { ClipboardCopy } from "@/components/ClipboardCopy/page"
 export default function GettingStartedPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -76,12 +76,13 @@ export default function GettingStartedPage() {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Clone the Repository</h2>
               <p className="text-gray-600 mb-4">Start by cloning the Phoenix repository to your local machine:</p>
-              <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+              <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto ">
                 <code>
                   git clone https://github.com/yourusername/phoenix.git
                   <br />
                   cd phoenix
                 </code>
+                
               </div>
             </section>
 
@@ -113,6 +114,7 @@ export default function GettingStartedPage() {
                   </CardHeader>
                   <CardContent>
                     <code className="text-sm bg-gray-100 p-2 rounded block">yarn install</code>
+
                   </CardContent>
                 </Card>
               </div>
@@ -154,6 +156,7 @@ export default function GettingStartedPage() {
                   <br />
                   NEXT_PUBLIC_PINATA_SECRET_API_KEY=your-pinata-api-secret
                 </code>
+                 
               </div>
 
               <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
