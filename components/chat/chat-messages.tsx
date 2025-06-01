@@ -41,20 +41,20 @@ export default function ChatMessages({
   }
 
   return (
-    <ScrollArea className="flex-1 px-4 overflow-y-auto" ref={scrollAreaRef}>
-      <div style={{ width: '100%', height: '550px', position: 'absolute' }}>
+    <ScrollArea className="flex-1 px-4 overflow-y-auto bg-transparent z-20" ref={scrollAreaRef}>
+      <div style={{ width: '100%', height: '550px', position: 'absolute' }} className="-z-10">
   <Particles
     particleColors={['#4f6af3', '#c2caf5']}
     particleCount={200}
     particleSpread={10}
     speed={0.1}
     particleBaseSize={100}
-    moveParticlesOnHover={true}
+    moveParticlesOnHover={false}
     alphaParticles={false}
     disableRotation={true}
   />
 </div>
-      {messages.length!==0 && <div className="mt-8" style={{ width: '100%', height: '500px', position: 'absolute' }}>
+      {messages.length!==0 && <div className="mt-8 -z-10" style={{ width: '100%', height: '500px', position: 'absolute' }}>
   <Orb hoverIntensity={0.5} rotateOnHover={true} hue={0} forceHoverState={false}/>
 </div>}
        
@@ -70,7 +70,7 @@ export default function ChatMessages({
               initial="hidden"
               animate="visible"
               exit="exit"
-              className={cn("flex w-full mb-4", message.role === "user" ? "justify-end" : "justify-start")}
+              className={cn("flex w-full mb-4 z-10", message.role === "user" ? "justify-end" : "justify-start")}
             >
              
               <div
@@ -154,7 +154,7 @@ function EmptyState({
         <Button
           variant="outline"
           size="sm"
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-2 group z-10"
           onClick={() => handleSuggestedPrompt("What can you help me with?")}
         >
           <span>What can you help me with?</span>
@@ -169,7 +169,7 @@ function EmptyState({
         <Button
           variant="outline"
           size="sm"
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-2 group z-10"
           onClick={() => fileInputRef.current?.click()}
         >
           <span>Upload an file</span>

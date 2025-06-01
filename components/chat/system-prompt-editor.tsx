@@ -81,30 +81,31 @@ export default function SystemPromptEditor({
   }
 
   return (
-    <Card className="w-full mb-4">
-      <CardHeader
-        className="pb-2 flex flex-row items-center justify-between cursor-pointer"
-        onClick={() => setIsExpanded(!isExpanded)}
+    <Card className="w-full h-full">
+      {/* <CardHeader
+        className="flex flex-row items-center justify-between cursor-pointer"
+        
       >
         <CardTitle className="text-md">AI Configuration</CardTitle>
-        <Button variant="ghost" size="sm">
+        {/* <Button variant="ghost" size="sm">
           {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-        </Button>
-      </CardHeader>
+        </Button> 
+      </CardHeader> */}
 
       {isExpanded && (
         <BackgroundBeamsWithCollision>
         <CardContent>
+          <CardTitle className="text-md mb-4 mt-8">AI Configuration</CardTitle>
           <div className="space-y-4">
             <div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 mb-4">
               <Button className="" disabled={isGenerating} onClick={handleAiGenerate}>{isGenerating?"Generating...":<>Generate <Wand2 className="h-4 w-4" /> </>}</Button>
               <Button onClick={handleOpenDeployModal} className="flex items-center" variant="outline">
               Deploy Agent
               <RocketIcon className="h-4 w-4" />
             </Button>
               </div>
-              <Label htmlFor="system-prompt">System Prompt</Label>
+              <Label htmlFor="system-prompt mt-4">System Prompt</Label>
               
               <Textarea
                 id="system-prompt"
@@ -116,7 +117,7 @@ export default function SystemPromptEditor({
             </div>
             
             <div>
-              <Label className="mb-2 block">Available Tools</Label>
+              <Label className="mb-4 mt-4 block">Available Tools</Label>
               <div className="grid grid-cols-2 gap-2">
                 {availableTools.map((tool) => (
                   <div key={tool.id} className="flex items-center space-x-2">
@@ -134,8 +135,8 @@ export default function SystemPromptEditor({
               </div>
             </div>
 
-            <Button onClick={onApplyConfig} className="w-full" variant="default">
-              <RefreshCw className="h-4 w-4 mr-2" />
+            <Button onClick={onApplyConfig} className="w-full mb-16 mt-4" variant="default">
+              <RefreshCw className="h-4 w-4 mr-2 " />
               Apply Configuration
             </Button>
           </div>
