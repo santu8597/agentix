@@ -8,7 +8,7 @@ import TypingPromptInput from "@/components/frontend/typing-prompt-input"
 import FramerSpotlight from "@/components/frontend/framer-spotlight"
 import CssGridBackground from "@/components/frontend/css-grid-background"
 import FeaturesSection from "@/components/frontend/features-section"
-import ToolsTable from "@/components/frontend/tools-table"
+
 import PhoenixLogo from "@/components/frontend/phoenix-logo"
 import Link from "next/link"
 export default function Home() {
@@ -78,7 +78,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <ToolsTable />
+            {/* <ToolsTable /> */}
           </div>
         </section>
 
