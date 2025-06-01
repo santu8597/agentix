@@ -24,6 +24,7 @@ export default function Navbar() {
     { label: "AI-chat", href: "/chat" },
     { label: "MarketPlace", href: "/buy" },
     { label: "My-agents", href: "/my-agents" },
+    { label:"Docs", href: "/docs"},
   ]
   const { address, isConnected } = useAccount()
   const { connect } = useConnect()
