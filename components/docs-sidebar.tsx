@@ -49,16 +49,6 @@ const sidebarItems = [
     icon: GitBranch,
   },
   {
-    title: "Contributing",
-    href: "/docs/contributing",
-    icon: Users,
-  },
-  {
-    title: "Changelog",
-    href: "/docs/changelog",
-    icon: History,
-  },
-  {
     title: "Privacy Policy",
     href: "/docs/privacy",
     icon: Shield,
