@@ -19,23 +19,18 @@ export default function Footer() {
             <nav aria-label="Product Navigation">
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="#features" className="text-muted-foreground hover:text-foreground">
-                    Features
+                  <Link href="/docs" className="text-muted-foreground hover:text-foreground">
+                    Getting Started
                   </Link>
                 </li>
                 <li>
-                  <Link href="#tools" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/docs/tools" className="text-muted-foreground hover:text-foreground">
                     Tools
                   </Link>
                 </li>
                 <li>
-                  <Link href="#use-cases" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/#use-cases" className="text-muted-foreground hover:text-foreground">
                     Use Cases
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#pricing" className="text-muted-foreground hover:text-foreground">
-                    Pricing
                   </Link>
                 </li>
               </ul>
@@ -46,50 +41,23 @@ export default function Footer() {
             <nav aria-label="Resources Navigation">
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/documentation" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/docs" className="text-muted-foreground hover:text-foreground">
                     Documentation
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tutorials" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/docs/examples" className="text-muted-foreground hover:text-foreground">
                     Tutorials
                   </Link>
                 </li>
                 <li>
-                  <Link href="/api" className="text-muted-foreground hover:text-foreground">
+                  <Link href="/docs/api" className="text-muted-foreground hover:text-foreground">
                     API Reference
                   </Link>
                 </li>
                 <li>
-                  <Link href="/github" className="text-muted-foreground hover:text-foreground">
+                  <Link href="https://github.com/santu8597/agentix" className="text-muted-foreground hover:text-foreground">
                     GitHub
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className="space-y-4">
-            <h3 className="text-sm font-bold">Company</h3>
-            <nav aria-label="Company Navigation">
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="/about" className="text-muted-foreground hover:text-foreground">
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/careers" className="text-muted-foreground hover:text-foreground">
-                    Careers
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="text-muted-foreground hover:text-foreground">
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/privacy" className="text-muted-foreground hover:text-foreground">
-                    Privacy Policy
                   </Link>
                 </li>
               </ul>
@@ -141,7 +109,7 @@ export default function Footer() {
                 <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
               </svg>
             </Link>
-            <Link href="https://github.com" className="text-muted-foreground hover:text-foreground" aria-label="GitHub">
+            <Link href="https://github.com/santu8597/agentix" className="text-muted-foreground hover:text-foreground" aria-label="GitHub">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

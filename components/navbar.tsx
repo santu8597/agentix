@@ -17,9 +17,9 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const { data: session, status } = useSession()
   const navItems = [
-    { label: "Features", href: "#features" },
-    { label: "Tools", href: "#tools" },
-    { label: "Use Cases", href: "#use-cases" },
+    { label: "Features", href: "/#features" },
+    { label: "Tools", href: "/#tools" },
+    { label: "Use Cases", href: "/#use-cases" },
     { label: "AI-customise", href: "/ai-test" },
     { label: "AI-chat", href: "/chat" },
     { label: "MarketPlace", href: "/buy" },
