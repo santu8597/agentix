@@ -1,13 +1,13 @@
 # 📄 License & Privacy Policy for Phoenix
 
-**Effective Date:** [Insert Date]  
-**Last Updated:** [Insert Date]
+**Effective Date:** June 1, 2025  
+**Last Updated:** June 1, 2025
 
 ---
 
 ## 🔐 Privacy Policy
 
-Phoenix ("the App") uses several Google APIs, including Gmail and YouTube, to provide tool-based AI agent functionality. We take your privacy seriously and adhere strictly to Google’s API Services User Data Policy, including the [Limited Use requirements](https://developers.google.com/terms/api-services-user-data-policy).
+Phoenix uses several Google APIs, including Gmail and YouTube, to provide tool-based AI agent functionality. We take your privacy seriously and adhere strictly to Google’s API Services User Data Policy, including the [Limited Use requirements](https://developers.google.com/terms/api-services-user-data-policy).
 
 ### What Data We Access
 
@@ -69,7 +69,7 @@ Phoenix is an open-source project licensed under the [MIT License](https://opens
 ```text
 MIT License
 
-Copyright (c) 2025 [Your Name]
+Copyright (c) 2025 [Santu Patra]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
